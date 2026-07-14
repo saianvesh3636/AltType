@@ -1,0 +1,25 @@
+// Debug.xcconfig
+// Development/Debug build configuration
+
+#include "Shared.xcconfig"
+
+// Code signing identity for development builds
+// Uses "Apple Development" certificate (the unique ID in parentheses is NOT the Team ID)
+CODE_SIGN_IDENTITY = Apple Development
+
+// Provisioning profile - let Xcode match automatically for development
+PROVISIONING_PROFILE_SPECIFIER =
+
+// Hardened runtime not required for debug
+ENABLE_HARDENED_RUNTIME = NO
+
+// Swift optimization for debugging
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Debug flags
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 $(inherited)
+
+// Debug information
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym

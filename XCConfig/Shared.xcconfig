@@ -1,0 +1,45 @@
+// Shared.xcconfig
+// Common settings inherited by all configurations
+// This includes the Team ID which is the SAME for all configurations
+
+// ===========================================
+// CODE SIGNING (same for all configurations)
+// ===========================================
+DEVELOPMENT_TEAM = WGJDQSJR57
+CODE_SIGN_STYLE = Automatic
+
+// ===========================================
+// BUNDLE & PRODUCT
+// ===========================================
+// Bundle IDs and entitlements are defined per-target in Project.swift
+// DO NOT hardcode them here - each app variant has its own bundle ID
+
+// ===========================================
+// SWIFT SETTINGS
+// ===========================================
+SWIFT_VERSION = 6.0
+SWIFT_STRICT_CONCURRENCY = targeted
+
+// ===========================================
+// DEPLOYMENT
+// ===========================================
+MACOSX_DEPLOYMENT_TARGET = 26.0
+
+// ===========================================
+// APP SANDBOX
+// ===========================================
+// Sandbox settings are defined per-target in Project.swift
+// App: ENABLE_APP_SANDBOX = NO (needs Accessibility)
+
+// ===========================================
+// RUNTIME & FRAMEWORKS
+// ===========================================
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks @loader_path/Frameworks
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+ALWAYS_SEARCH_USER_PATHS = NO
+
+// ===========================================
+// CODE SIGNING FOR FRAMEWORKS
+// These settings apply to embedded frameworks
+// ===========================================
+COPY_PHASE_STRIP = NO

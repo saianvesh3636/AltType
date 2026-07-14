@@ -1,0 +1,25 @@
+// Release.xcconfig
+// Production build configuration
+
+#include "Shared.xcconfig"
+
+// Code signing identity for distribution
+// With automatic signing, Xcode selects the correct certificate (Development for builds, Distribution for archives)
+CODE_SIGN_IDENTITY = Apple Development
+
+// Provisioning profile - set if you have a specific profile, otherwise leave empty for auto-matching
+PROVISIONING_PROFILE_SPECIFIER =
+
+// Hardened runtime for notarized distribution
+ENABLE_HARDENED_RUNTIME = YES
+
+// Swift optimization for production
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Production flags
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION
+GCC_PREPROCESSOR_DEFINITIONS = PRODUCTION=1 $(inherited)
+
+// Debug information
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym

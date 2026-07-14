@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "WebSearch",
+      "WebFetch(domain:stackoverflow.com)",
+      "Bash(defaults delete:*)",
+      "Bash(true)",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
