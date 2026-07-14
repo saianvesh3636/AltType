@@ -27,3 +27,10 @@ enum AppConfiguration {
         whisperKitModelsDirectory?.appendingPathComponent("openai_whisper-\(modelName)")
     }
 }
+
+extension AppConfiguration {
+    /// Build number as an integer
+    static var buildNumber: Int {
+        Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String)!
+    }
+}
