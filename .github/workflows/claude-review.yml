@@ -19,15 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
             Review this pull request as a first-pass reviewer for AltType, a Swift 6 /
-            SwiftUI macOS 26 menu bar app. Post your findings as PR review comments.
+            SwiftUI macOS 26 menu bar app. The PR branch is already checked out in the
+            current working directory; use `gh pr diff` to read the changes.
 
             Flag anything that violates this repo's standards:
             - Force unwraps (`!`) or implicitly unwrapped optionals
@@ -41,6 +45,13 @@ jobs:
             - Privacy regressions: this app promises no network calls, no telemetry,
               no data collection — flag ANY new networking or data egress immediately
 
+            Use `gh pr comment` for top-level feedback.
+            Use `mcp__github_inline_comment__create_inline_comment` (with `confirmed: true`)
+            to highlight specific code issues on the relevant lines.
+            Only post GitHub comments — don't submit review text as plain messages.
+
             Be concise. Only comment on real issues — do not pad the review with
             praise or style nitpicks. You are a reviewer, not an approver: never
             approve the PR, never push changes; comments only.
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
