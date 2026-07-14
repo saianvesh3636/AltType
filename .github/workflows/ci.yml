@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: xcodebuild -version
+
+      - name: Install Tuist
+        run: brew install --formula --quiet tuist
+
+      - name: Generate project
+        run: |
+          tuist install
+          tuist generate --no-open
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild -workspace theTypeAlternative.xcworkspace \
+            -scheme theTypeAlternative \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build | tail -60

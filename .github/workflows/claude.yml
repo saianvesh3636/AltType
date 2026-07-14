@@ -1,0 +1,28 @@
+name: Claude (mention)
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  claude:
+    # Maintainer-only trigger: prevents strangers from spending the repo's
+    # Claude quota by commenting @claude. Also the review path for fork PRs,
+    # which never receive secrets on pull_request events.
+    if: contains(github.event.comment.body, '@claude') && github.event.comment.user.login == 'saianvesh3636'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
