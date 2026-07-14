@@ -16,7 +16,7 @@ jobs:
         run: xcodebuild -version
 
       - name: Install Tuist
-        run: brew install --formula --quiet tuist
+        run: brew install --quiet tuist/tuist/tuist
 
       - name: Generate project
         run: |
