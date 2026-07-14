@@ -16,7 +16,11 @@ jobs:
         run: xcodebuild -version
 
       - name: Install Tuist
-        run: brew install --quiet tuist/tuist/tuist
+        uses: jdx/mise-action@v2
+        with:
+          mise_toml: |
+            [tools]
+            tuist = "4.55.6"
 
       - name: Generate project
         run: |
